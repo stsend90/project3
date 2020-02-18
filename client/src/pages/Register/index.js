@@ -26,12 +26,13 @@ class Register extends Component {
         if (value.length > 7) {
           API.availableUN(value.toLowerCase())
             .then(res => {
+              console.log(res)
               res.data.length < 1
                 ? this.setState({ validUN: true })
                 : this.setState({ validUN: false });
             })
             .catch(err => {
-              console.log(err);
+              console.log("error problem", err);
             });
         } else {
           this.setState({ validUN: false });
