@@ -51,6 +51,7 @@ router.get("/api/user", function(req, res) {
   if (req.query.username) {
     db.User.find({ username: req.query.username })
       .then(result => {
+        console.log("available username");
         res.json({ length: result.length });
       })
       .catch(err => res.status(422).json(err));
