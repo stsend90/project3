@@ -26,7 +26,7 @@ class Register extends Component {
         if (value.length > 7) {
           API.availableUN(value.toLowerCase())
             .then(res => {
-              console.log(res)
+              console.log(res);
               res.data.length < 1
                 ? this.setState({ validUN: true })
                 : this.setState({ validUN: false });
