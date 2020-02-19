@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-const MONGODB_URI = process.env.MONGODB_URL || "mongodb://heroku_p9vlxnhw:Mongol10!@ds363996.mlab.com:63996/heroku_p9vlxnhw";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/heroku_p9vlxnhw";
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
