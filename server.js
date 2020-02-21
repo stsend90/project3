@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const routes = require("./routes")
 const session = require("express-session");
 const passport = require("./config/passport");
+require("dotenv").config();
+
 
 app.use(session({ secret: "developer", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -20,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-const MONGODB_URI = process.env.MONGODB_URL || "mongodb://heroku_p9vlxnhw:d8qis2as4gi7gn68peinhh7a3r@ds363996.mlab.com:63996/heroku_p9vlxnhw";
+const MONGODB_URI = process.env.MONGODB_URI;
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
