@@ -13,6 +13,9 @@ export default {
   logout: function () {
     return axios.get("/api/logout");
   },
+  discussion: function () {
+    
+  },
   availableUN: function (username) {
     return axios.get("/api/user/?username=" + username);
   }
