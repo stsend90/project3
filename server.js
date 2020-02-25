@@ -33,7 +33,7 @@ mongoose.connect(MONGODB_URI,options);
 
 mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected!!!")
-})
+});
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

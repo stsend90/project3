@@ -60,6 +60,26 @@ router.get("/api/user", function(req, res) {
   }
 });
 
+router.get("/api/discussion", function(req, res) {
+  console.log("blah blah");
+  if(req.query.username) {
+    db.Discussion.findAll({}).then(function(data) {
+      res.json(data);
+    })
+    .catch(function(error) {
+      console.log("error")
+    })
+  }
+});
+
+router.post("/api/discussion", function(req, res) {
+  const data = {
+    username: "jay",
+    age: 15
+  };
+  res.json(data);
+});
+
 router.get("/api/authorized", isAuthenticated, function(req, res) {
   res.json(req.user);
 });
