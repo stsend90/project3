@@ -4,6 +4,8 @@ import Jumbotron from "../components/Jumbotron";
 import NavigationBar from "../components/navbar";
 import ControlledCard from "../components/NewsSection/index";
 import NewsCard from "../components/NewsSection/newsCard";
+import ControlledSearch from "../components/brewSearch/index";
+import SearchCard from "../components/brewSearch/searchCard";
 
 function Home({logout}) {
   console.log('here')
@@ -15,6 +17,7 @@ function Home({logout}) {
           <Jumbotron>
             <h1>Welcome to the Home Page</h1>
           </Jumbotron>
+          <SearchCard />
           <ControlledCard />
         </Col>
       </Row>
