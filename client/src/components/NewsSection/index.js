@@ -12,6 +12,7 @@ class ControlledCard extends React.Component {
             items: []
         };
     }
+    
 
     componentDidMount() {
         fetch("http://newsapi.org/v2/everything?" + "q=Breweries&" + "sortBy=popularity&" + "apiKey=b504cfeca75d426188bed3c20f49bf93")
@@ -34,6 +35,7 @@ class ControlledCard extends React.Component {
               });
             }
           )
+          
       };
 
       renderCard = () => {
