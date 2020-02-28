@@ -8,7 +8,7 @@ const passport = require("./config/passport");
 require("dotenv").config();
 
 
-app.use(session({ secret: "developer", resave: true, saveUninitialized: true }));
+app.use(session({ secret: process.env.PASSPORT_SECRET, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -22,14 +22,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-const MONGODB_URI = process.env.MONGODB_URI;
-const options = {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  family: 4
-};
-mongoose.connect(MONGODB_URI,options);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/project3", { useNewUrlParser: true });
 
 mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected!!!")
