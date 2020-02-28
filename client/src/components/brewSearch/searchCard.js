@@ -3,9 +3,10 @@ import Card from 'react-bootstrap/Card';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
+import ControlledSearch from './index';
 
 
-export const SearchCard = () =>{
+export const SearchCard = ({location}) =>{
     return(
     <>
     <Card>
@@ -16,7 +17,9 @@ export const SearchCard = () =>{
         <InputGroup className="mb-3">
             <FormControl
                 placeholder="Enter City Name"
+                
              />
+             {location}
                 <InputGroup.Append>
                 <Button variant="outline-secondary">Search</Button>
                 </InputGroup.Append>
