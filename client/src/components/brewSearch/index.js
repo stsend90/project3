@@ -1,10 +1,8 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import SearchCard from './searchCard';
-import BrewCard from './brewCard'
+import BrewCard from './brewCard';
 
-let breweries;
-let location;
 
 
 class ControlledSearch extends React.Component {
@@ -12,18 +10,31 @@ class ControlledSearch extends React.Component {
         super(props);
         this.state = {
             isLoaded: false,
-            filtered: []
+            filtered: [],
+            location: ""
         };
 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        this.fetchData();
-    }
+    handleChange(event) {
+        this.setState({location: event.target.value},
+            
+            );
+      }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        this.fetchData({
+            location: this.state.location.toLocaleLowerCase()
+        });
+        console.log("clicked")
+      }
 
 
     fetchData = () => {
-        fetch("https://api.openbrewerydb.org/breweries?by_city=tampa")
+        fetch(`https://api.openbrewerydb.org/breweries?by_city=${this.state.location}`)
         .then(res => res.json())
         .then(
             (result) => {
@@ -44,21 +55,27 @@ class ControlledSearch extends React.Component {
 
 
     renderBrews = () => {
-        const brewItems = this.state.filtered.map(breweries => {
-            return (
-                <BrewCard
-                  key={breweries.id}
-                  breweries={breweries}
-                  />
-            )
-        });
-        return <Card>{brewItems}</Card>
+        return this.state.filtered.map(breweries => (
+                <Card>
+                    <BrewCard
+                        key={breweries.id}
+                        breweries={breweries}
+                    />
+                </Card>
+            ));
     }
 
 
     render () {
         return(
-            this.renderBrews()
+            <div>
+                <SearchCard 
+                    value={this.state.location}
+                    handleChange={this.handleChange}
+                    onclick={this.handleSubmit}
+                />   
+                {this.renderBrews()}
+            </div>
         );
     }
 }

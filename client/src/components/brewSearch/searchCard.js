@@ -4,9 +4,10 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import ControlledSearch from './index';
+import { Input } from '../Form';
 
 
-export const SearchCard = ({location}) =>{
+export const SearchCard = ({location, handleChange, onclick}) =>{
     return(
     <>
     <Card>
@@ -14,16 +15,20 @@ export const SearchCard = ({location}) =>{
             <h3>Search for a brewery near you</h3>
         </Card.Header>
         <Card.Body>
-        <InputGroup className="mb-3">
-            <FormControl
-                placeholder="Enter City Name"
+        <form>
+            <InputGroup className="mb-3">
+                <Input 
+                    type="text"
+                    placeholder="Enter City Name"
+                    value={location}
+                    onChange={handleChange}
+                />
                 
-             />
-             {location}
-                <InputGroup.Append>
-                <Button variant="outline-secondary">Search</Button>
-                </InputGroup.Append>
-            </InputGroup>
+                    <InputGroup.Append>
+                    <Button onClick={onclick} variant="outline-secondary" type="submit">Search</Button>
+                    </InputGroup.Append>
+                </InputGroup>
+                </form>
         </Card.Body>
 
         </Card>
