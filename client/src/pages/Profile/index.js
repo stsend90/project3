@@ -1,22 +1,49 @@
-import React from "react";
-import { Col, Row, Container } from "../../components/Grid";
-import Jumbotron from "../../components/Jumbotron";
+import React, { Component } from "react";
+import { Col, Row, Container} from "../../components/Grid";
 import NavigationBar from "../../components/navbar";
+import API from "../../utils/API"
+import Profile from "./Profile";
 
-function Profile({logout}) {
-  console.log('here')
-  return (
-    <Container fluid>
-      <NavigationBar logout={logout} />
-      <Row>
-        <Col size="md-12">
-          <Jumbotron>
-            <h1>Profile</h1>
-          </Jumbotron>
-        </Col>
-      </Row>
-    </Container>
-  );
+class Discussion extends Component {
+
+  state = {
+    title: '',
+    body: '',
+    discussions: []
+  }
+
+  componentDidMount() {
+    this.getDiscussionCards();
+  }
+
+  getDiscussionCards = () => {
+    API.getDiscussion()
+      .then(res => {
+        console.log(res.data);
+        let myDiscussion = res.data.discussion;
+        this.setState({ discussions: myDiscussion.map(discussion => <Row><Profile title={ discussion.title } body={ discussion.body } /></Row>) });
+      })
+      .catch(err => {
+        console.error(err);
+        return null;
+      })
+  };
+
+  render() {
+    return (
+      <div>
+        <Container fluid>
+          <NavigationBar logout={this.props.logout} />
+               
+          <div className="discussion-post">
+          <h3>Welcome {this.props.user}</h3>
+
+            {this.state.discussions}
+          </div>
+        </Container>
+      </div>
+    );
+  }
 }
 
-export default Profile;
+export default Discussion;
