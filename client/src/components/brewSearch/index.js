@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import SearchCard from './searchCard';
 import BrewCard from './brewCard';
+import MapCard from './mapCard';
 
 
 
@@ -11,7 +12,9 @@ class ControlledSearch extends React.Component {
         this.state = {
             isLoaded: false,
             filtered: [],
-            location: ""
+            location: "",
+            longitude: 0,
+            latitude: 0
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +30,7 @@ class ControlledSearch extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.fetchData({
-            location: this.state.location.toLocaleLowerCase()
+            location: this.state.location.toLocaleLowerCase().trim()
         });
         console.log("clicked")
       }
@@ -39,9 +42,12 @@ class ControlledSearch extends React.Component {
         .then(
             (result) => {
                 console.log(result)
+                console.log(result[0].longitude)
             this.setState({
                 isLoaded: true,
-                filtered: result
+                filtered: result,
+                longitude: result.longitude,
+                latitude: result.latitude
             })
             },
             (error) => {
@@ -53,6 +59,16 @@ class ControlledSearch extends React.Component {
         )
     };
 
+    // renderMaps = () => {
+    //     return this.state.filtered.map(map => (
+            
+    //         <MapCard 
+    //             key={map.id}
+    //         />
+
+    //     ))
+    // }
+
 
     renderBrews = () => {
         return this.state.filtered.map(breweries => (
@@ -61,6 +77,8 @@ class ControlledSearch extends React.Component {
                         key={breweries.id}
                         breweries={breweries}
                     />
+                    
+                    
                 </Card>
             ));
     }
