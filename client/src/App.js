@@ -80,6 +80,13 @@ class App extends Component {
                 <Login isAuthorized={this.isAuthorized} />
               )}
             </Route>
+            <Route exact path="/discussion/:id">
+              {this.state.authorized ? (
+                <Discussion logout={this.logout} />
+              ) : (
+                <Login isAuthorized={this.isAuthorized} />
+              )}
+            </Route>
             <Route exact path="/profile">
               {this.state.authorized ? (
                 <Profile logout={this.logout} />

@@ -55,6 +55,20 @@ router.post("/api/discussion", isAuthenticated, function (req, res) {
   })
 })
 
+router.post("/api/discussion/:id", isAuthenticated, function (req, res) {
+  db.Comment.create({ title: req.body.title, body: req.body.body })
+  .then(function(dbComment) {
+    return db.Discussion.findOneAndUpdate( {_id: req.user._id}, {$push: {comment: dbComment._id}}, { new: true } )
+  })
+  .then(function(dbDiscussion) {
+    res.json(dbDiscussion)
+  })
+  .catch(function(error) {
+    console.log(error);
+    res.json(error);
+  })
+})
+
 router.get("/api/logout", function(req, res) {
   req.logout();
   res.json({ message: "logged out" });
@@ -90,6 +104,19 @@ router.get("/api/discussion", isAuthenticated, function(req, res) {
     res.json(err);
   });
 });
+
+// router.get("/api/discussion/:id", isAuthenticated, function(req, res) {
+//   db.User.findOne({ _id: req.user._id })
+//   .populate("discussion")
+//   .then(function(dbDiscussion) {
+//     res.json(dbDiscussion);
+//     console.log(dbDiscussion);
+//     console.log(req.user.username);    
+//   })
+//   .catch(function(error) {
+//     res.json(err);
+//   });
+// });
 
 router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
   db.Discussion.deleteOne({ _id: req.params._id }),

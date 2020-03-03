@@ -10,6 +10,9 @@ export default {
   submit: function (data) {
     return axios.post("/api/discussion", data);
   },
+  // submit: function (data) {
+  //   return axios.post("/api/discussion/:_id", data);
+  // },
   isAuthorized: function () {
     return axios.get("/api/authorized");
   },
@@ -22,6 +25,12 @@ export default {
   getDiscussion: function () {
     return axios.get("/api/discussion");
   },
+  getComment: function () {
+    return axios.get("/api/discussion/:id");
+  },
+  // getDiscussion: function () {
+  //   return axios.get("/api/discussion/:_id");
+  // },
   deleteDiscussion: function (id) {
     return axios.delete("/api/discussion/" + id);
   },

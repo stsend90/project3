@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Card, Col, Row, ListGroup } from 'react-bootstrap';
+import { Card, Col, Row, ListGroup, Nav } from 'react-bootstrap';
+import { FormBtn } from "../../components/Form";
+
+import { Link } from "react-router-dom";
+import addComment from "./AddComment"
 
 
 export default class DiscussCard extends Component {
@@ -11,19 +15,30 @@ export default class DiscussCard extends Component {
     render() {
         return (
             <>
-            <Col>
-                <ListGroup className="fluid" horizontal="sm">
+                <Col>
+                    <ListGroup className="fluid">
 
-                    <ListGroup.Item>
-                    
-                        <h2>{this.props.username}</h2>
-                        <h2>{this.props.title}</h2>
-                        <hr />
-                        <p>{this.props.body}</p>
-                    </ListGroup.Item>
+                        <ListGroup.Item>
 
-                </ListGroup>
-            </Col>
+                            <h5>{this.props.username}: <h2>{this.props.title}</h2></h5>
+                            <hr />
+                            <h4>{this.props.body}</h4>
+                            <Nav.Item>
+                                <Link></Link><FormBtn
+                                    text="Comment"
+                                    // onClick={}
+                                    classes="btn-primary logoutBtn"
+                                /> />
+                                <FormBtn
+                                    text="Delete"
+                                    // onClick={}
+                                    classes="btn-primary logoutBtn"
+                                />
+                            </Nav.Item>
+                        </ListGroup.Item>
+
+                    </ListGroup>
+                </Col>
             </>
         )
     }

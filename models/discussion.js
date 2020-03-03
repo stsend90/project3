@@ -12,10 +12,12 @@ const DiscussionSchema = new Schema ({
         required:true,
         unique:true
     },
-    date: {
-        type: String,
-        default: Date.now()
-    }
+    comment: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+    }],
+    created: { type: Date, required: true, default: Date.now() },
+
 })
 
 const Discussion = mongoose.model("Discussion", DiscussionSchema);
