@@ -11,7 +11,7 @@ const User = new Schema({
     },
     created: { type: Date, required: true, default: Date.now() },
     
-    Discussion: [{
+    discussion: [{
         type: Schema.Types.ObjectId,
         ref: "Discussion"
     }]

@@ -7,8 +7,8 @@ export default {
   login: function (user) {
     return axios.post("/api/login", user);
   },
-  submit: function (user) {
-    return axios.post("/api/discussion", user);
+  submit: function (data) {
+    return axios.post("/api/discussion", data);
   },
   isAuthorized: function () {
     return axios.get("/api/authorized");

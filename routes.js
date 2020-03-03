@@ -41,10 +41,10 @@ router.post("/api/login", function(req, res, next) {
   })(req, res, next);
 });
 
-router.post("/api/discussion", function (req, res) {
+router.post("/api/discussion", isAuthenticated, function (req, res) {
   db.Discussion.create({ title: req.body.title, body: req.body.body })
   .then(function(dbDiscussion) {
-    return db.User.findOneAndUpdate( {_id: req.user._id}, {$set: {discussion: dbDiscussion._id}} )
+    return db.User.findOneAndUpdate( {_id: req.user._id}, {$push: {discussion: dbDiscussion._id}}, { new: true } )
   })
   .then(function(dbUser) {
     res.json(dbUser)
@@ -79,12 +79,12 @@ router.get("/api/authorized", isAuthenticated, function(req, res) {
 });
 
 router.get("/api/discussion", isAuthenticated, function(req, res) {
-  db.User.find({ _id: req.user._id })
+  db.User.findOne({ _id: req.user._id })
   .populate("discussion")
   .then(function(dbDiscussion) {
     res.json(dbDiscussion);
     console.log(dbDiscussion);
-    console.log(req.user._id)    
+    console.log(req.user.username);    
   })
   .catch(function(error) {
     res.json(err);
@@ -95,8 +95,8 @@ router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
   db.Discussion.deleteOne({ _id: req.params._id }),
   console.log(req.params._id),
   db.User.deleteOne({ _id: req.params._id })
-  .then(function(res) {
-    console.log(res);
+  .then(function(dbUser) {
+    console.log(dbUser);
   })
   .catch(function(error) {
     console.log(error);
