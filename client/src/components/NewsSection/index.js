@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import NewsCard from './newsCard';
+import CardDeck from 'react-bootstrap/CardDeck';
 
 
 class ControlledCard extends React.Component {
@@ -15,7 +16,7 @@ class ControlledCard extends React.Component {
     
 
     componentDidMount() {
-        fetch("http://newsapi.org/v2/everything?" + "q=Breweries&" + "sortBy=popularity&" + "apiKey=b504cfeca75d426188bed3c20f49bf93")
+        fetch("http://newsapi.org/v2/everything?" + "q=breweries&" + "sortBy=relevancy&" + "apiKey=b504cfeca75d426188bed3c20f49bf93")
           .then(res => res.json())
           .then(
             (result) => {
@@ -39,7 +40,7 @@ class ControlledCard extends React.Component {
       };
 
       renderCard = () => {
-          const CardItems = this.state.items.map(article => {
+          const CardItems = this.state.items.slice(0, 5).map(article => {
               return (
                   <NewsCard
                     key={article.publishedAt}
@@ -47,7 +48,7 @@ class ControlledCard extends React.Component {
                     />
               )
           });
-          return <Card>{CardItems}</Card>;
+          return <CardDeck>{CardItems}</CardDeck>;
       }
 
       render(){
