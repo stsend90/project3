@@ -12,7 +12,7 @@ export default class Discussion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      date: '',
       title: '',
       body: '',
       discussions: []
@@ -41,10 +41,6 @@ export default class Discussion extends Component {
         console.log(res);
         this.getDiscussionCards();
       });
-      this.state = {
-        title: '',
-        body: '',
-      }
   };
 
   getDiscussionCards = () => {
@@ -54,7 +50,7 @@ export default class Discussion extends Component {
         console.log(myDiscussion);
 
         this.setState({
-          discussions: myDiscussion.map(discussion => <Row><Post username={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
+          discussions: myDiscussion.map(discussion => <Row><Post date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
         })
 
         console.log(this.state.myDiscussion)
@@ -68,15 +64,13 @@ export default class Discussion extends Component {
       <div>
         <Container fluid>
           <NavigationBar logout={this.props.logout} />
-          <div className="discussion-post">
-            <h3>Comments</h3>
-            <div>{this.state.discussions}</div>
-          </div>
+          <h1>History</h1>
+          {this.state.discussions}
           <Row>
             <Col size="md-12">
               <ListGroup.Item>
 
-                <label for="exampleFormControlTextarea1">Post a topic</label>
+                <label for="exampleFormControlTextarea1"><h3>Post a topic</h3></label>
                 <input class="form-control" type="text" placeholder="Title" name="title"
                   placeholder="Title"
                   value={this.state.title}
