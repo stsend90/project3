@@ -7,8 +7,8 @@ export default {
   login: function (user) {
     return axios.post("/api/login", user);
   },
-  submit: function (data) {
-    return axios.post("/api/profile", data);
+  submit: function (user) {
+    return axios.post("/api/discussion", user);
   },
   isAuthorized: function () {
     return axios.get("/api/authorized");
@@ -21,12 +21,6 @@ export default {
   },
   getDiscussion: function () {
     return axios.get("/api/discussion");
-  },
-  renderComment: function () {
-    return axios.get("/api/profile");
-  },
-  getOneDiscussion: function (id) {
-    return axios.get("/api/discussion/:id" + id);
   },
   deleteDiscussion: function (id) {
     return axios.delete("/api/discussion/" + id);

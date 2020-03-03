@@ -1,96 +1,89 @@
-import React from "react";
+import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import NavigationBar from "../../components/navbar";
-import Comments from "./Comments"
+import API from "../../utils/API"
 
-class Comments extends Component {
+export default class Discussion extends Component{
 
-    state = {
-        title: '',
-        body: '',
-        comments: []
+  constructor(props){
+    super(props);
+    this.state = {
+      title: '',
+      body: ''
     }
+  }
 
-    componentDidMount() {
-        this.getDiscussionCards();
-    }
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
 
-    getDiscussionCards = () => {
-        API.getDiscussion()
-            .then(res => {
-                console.log(res.data);
-                let myDiscussion = res.data.discussion;
-                this.setState({ discussions: myDiscussion.map(discussion => <Row><Comments title={discussion.title} body={discussion.body} /></Row>) });
-            })
-            .catch(err => {
-                console.error(err);
-                return null;
-            })
-    };
+    this.setState({
+      [name]: value.trim()
+    })
+    console.log(this.state)
+  };
 
-    submit = (event) => {
-        API.submit({
-            title: this.state.title,
-            body: this.state.body
-        })
-            .then(res => {
-                console.log(res);
-                this.getDiscussionCards();
-            });
-    };
+  submit = (event) => {
+    event.preventDefault();
+    API.submit({
+      title: this.state.title,
+      body: this.state.body
+    })
+    .then(function(res) {
+      console.log(res);
+    });
+  };
 
-
-    handleInputChange = (event) => {
-        const { name, value } = event.target;
-
+  getDiscussion = () => {
+    API.getDiscussion()
+    .then(function(res) {
+      let myDiscussion = res.data;
+      console.log(myDiscussion);
+      for(let i = 0; i < myDiscussion.lenght; i++) {
         this.setState({
-            [name]: value
+          discussion: myDiscussion.concat()
         })
-    };
+      }
+      console.log(this.state.budget)
+    })
+    .catch(err => console.log(err))
+  }
 
-    render() {
-        return (
-          <div>
-            <Container fluid>
-              <NavigationBar logout={this.props.logout} />
-              <Row>
-                <Col size="md-12">
-                  <h2>Welcome to Test Center</h2>
-                  <form>
-                    <div className="form-input">
-                      <input 
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        value={this.state.title}
-                        onChange={this.handleInputChange}
-                      />
-                    </div>
-                    <div className="form-input">
-                      <label text="comment"></label>
-                      <textarea 
-                        placeholder="text-area" 
-                        name="body" 
-                        type="text" 
-                        rows="4" 
-                        value={this.state.body} 
-                        onChange={this.handleInputChange}>   
-                      </textarea>
-                    </div>
-                    <button className="btn-success"  onClick={this.submit}>Submit</button>
-                  </form>
-                </Col>
-              </Row>
-              <div className="discussion-post">
-            <h3>Comments</h3>
-
-            {this.state.discussions}
-          </div>
+  render(){
+    console.log("State: ", this.state)
+    return (
+      <div>
+        <Container fluid>
+          <NavigationBar logout={this.props.logout} />
+          <Row>
+            <Col size="md-12">
+              <h2>Welcome to Test Center</h2>
+              <form>
+                <div className="form-input">
+                  <input 
+                    type="text"
+                    name="title"
+                    placeholder="Title"
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+                <div className="form-input">
+                  <textarea 
+                    placeholder="text-area" 
+                    name="body" 
+                    cols="30" 
+                    rows="10" 
+                    value={this.state.body} 
+                    onChange={this.handleInputChange}>   
+                  </textarea>
+                </div>
+                <button className="btn-success" onClick={this.submit}>Submit</button>
+              </form>
+            </Col>
+          </Row>
         </Container>
       </div>
     );
   }
 }
-
-    export default Comments;

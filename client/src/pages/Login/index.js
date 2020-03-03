@@ -22,7 +22,6 @@ class Login extends Component {
             error: res.data.message
           });
         } else {
-          
           console.log("login successful")
           this.props.isAuthorized();
         }
