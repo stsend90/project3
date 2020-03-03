@@ -12,6 +12,14 @@ export default class DiscussCard extends Component {
         super(props)
     }
 
+    // deleteDiscussion(id) {
+    //     this.setState((prevState) => ({
+    //         discussion: prevState.discussion.filter(item => item.id !== id),
+    //     }))
+    // };
+
+    
+
     render() {
         return (
             <>
@@ -35,35 +43,16 @@ export default class DiscussCard extends Component {
                                         classes="btn-primary logoutBtn"
                                     />
                                 </Nav.Item>
+                                
                             </ListGroup.Item>
+                            <br />
 
-                    </Col>
-                    {/* <Col size="md-12">
-                            <ListGroup.Item>
-
-                                <h5>{this.props.username}: <h2>{this.props.title}</h2></h5>
-                                <hr />
-                                <h4>{this.props.body}</h4>
-                                <Nav.Item>
-                                    <FormBtn
-                                        text="Comment"
-                                        // onClick={}
-                                        classes="btn-primary logoutBtn"
-                                    />
-                                    <> </>
-                                    <FormBtn
-                                        text="Delete"
-                                        // onClick={}
-                                        classes="btn-primary logoutBtn"
-                                    />
-                                </Nav.Item>
-                            </ListGroup.Item>
 
                     </Col>
                     <Col size="md-12">
                             <ListGroup.Item>
 
-                                <h5>{this.props.username}: <h2>{this.props.title}</h2></h5>
+                                <h5>{this.props.date}: <h2>{this.props.title}</h2></h5>
                                 <hr />
                                 <h4>{this.props.body}</h4>
                                 <Nav.Item>
@@ -79,9 +68,34 @@ export default class DiscussCard extends Component {
                                         classes="btn-primary logoutBtn"
                                     />
                                 </Nav.Item>
+
                             </ListGroup.Item>
 
-                    </Col> */}
+                    </Col>
+
+                    <Col size="md-12">
+                            <ListGroup.Item>
+
+                                <h5>{this.props.date}: <h2>{this.props.title}</h2></h5>
+                                <hr />
+                                <h4>{this.props.body}</h4>
+                                <Nav.Item>
+                                    <FormBtn
+                                        text="Comment"
+                                        // onClick={}
+                                        classes="btn-primary logoutBtn"
+                                    />
+                                    <> </>
+                                    <FormBtn
+                                        text="Delete"
+                                        // onClick={}
+                                        classes="btn-primary logoutBtn"
+                                    />
+                                </Nav.Item>
+                                
+                            </ListGroup.Item>
+
+                    </Col>
 
             </>
         )

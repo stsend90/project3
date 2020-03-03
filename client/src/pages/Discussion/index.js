@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
+import { FormBtn } from "../../components/Form";
 import Jumbotron from "../../components/Jumbotron";
 import NavigationBar from "../../components/navbar";
-import { InputGroup, FormControl, ListGroup } from "react-bootstrap"
+import { InputGroup, Nav, ListGroup } from "react-bootstrap"
 import API from "../../utils/API"
 import Post from "./Post"
 import AddComment from "./AddComment"
@@ -64,9 +65,37 @@ export default class Discussion extends Component {
       <div>
         <Container fluid>
           <NavigationBar logout={this.props.logout} />
+          <br />
           <h1>History</h1>
+          <br />
           {this.state.discussions}
+          <br />
           <Row>
+          <Col size="md-12">
+                            <ListGroup.Item>
+
+                                <p>{this.props.date}: <h2>{this.props.title}</h2></p>
+                                <hr />
+                                <h4>{this.props.body}</h4>
+                                <Nav.Item>
+                                    <FormBtn
+                                        text="Comment"
+                                        // onClick={}
+                                        classes="btn-primary logoutBtn"
+                                    />
+                                    <> </>
+                                    <FormBtn
+                                        text="Delete"
+                                        // onClick={}
+                                        classes="btn-primary logoutBtn"
+                                    />
+                                </Nav.Item>
+                                
+                            </ListGroup.Item>
+                            <br />
+
+
+                    </Col>
             <Col size="md-12">
               <ListGroup.Item>
 

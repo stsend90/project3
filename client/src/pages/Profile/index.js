@@ -3,7 +3,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import NavigationBar from "../../components/navbar";
 import { InputGroup, FormControl, ListGroup } from "react-bootstrap"
-import Post from "../Discussion/Post";
+import Post from "./Post";
 import API from "../../utils/API"
 
 
@@ -50,8 +50,11 @@ export default class Profile extends Component {
       <div>
         <Container fluid>
           <NavigationBar logout={this.props.logout} />
-          <h1>Hello</h1>
+          <br />
+          <h1>History</h1>
+          <br />
           {this.state.discussions}
+          <br />
         </Container>
       </div>
     );
