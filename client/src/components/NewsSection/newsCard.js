@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 export const NewsCard = ({article}) => {
     return (
         <>  
+        
         <Card border="dark" style={{ width: '18rem' }}>
             <Card.Body>
                 <Card.Img variant="top" src={article.urlToImage} />
