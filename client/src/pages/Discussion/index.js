@@ -39,23 +39,11 @@ export default class Discussion extends Component {
         console.log(res);
         this.getDiscussionCards();
       });
+    this.setState({
+      title: "",
+      body: ""
+    })
   };
-
-  addComment = async (discussion_id, comment) => {
-    //TODO: API call to add comment
-    let resp = {};
-    try {
-      resp = await API.addComment(discussion_id, comment);
-    } catch (error) {
-      resp = error
-      alert("There was an error submitting your comment :(")
-      console.error(resp);
-    }
-
-    if (resp.status === 200) {
-      alert("Sucess! Your comment was submitted :)")
-    }
-  }
 
   getDiscussionCards = () => {
     API.getDiscussion()
@@ -67,7 +55,7 @@ export default class Discussion extends Component {
           discussions: myDiscussion
         })
 
-        console.log(this.state.myDiscussion)
+        console.log(this.state.discussions)
       })
       .catch(err => console.log(err))
   }
@@ -75,7 +63,7 @@ export default class Discussion extends Component {
   get postCards() {
     const { discussions } = this.state;
     if (discussions.length > 0) {
-      return discussions.map(discussion => <Row><Posts date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
+      return discussions.map(discussion => <Row><Posts discId={discussion._id} date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
     } else {
       return <p>Sorry nothing to display!</p>
     }
@@ -103,12 +91,12 @@ export default class Discussion extends Component {
             <Col size="md-12">
               <ListGroup.Item>
 
-                <label for="exampleFormControlTextarea1"><h3>Post a topic</h3></label>
-                <input class="form-control" type="text" placeholder="Title" name="title"
+                <label className="exampleFormControlTextarea1"><h3>Post a topic</h3></label>
+                <input className="form-control" type="text" placeholder="Title" name="title"
                   placeholder="Title"
                   value={this.state.title}
                   onChange={this.handleInputChange} />
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"
+                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" name="body"
                   cols="30"
                   rows="10"
                   value={this.state.body}

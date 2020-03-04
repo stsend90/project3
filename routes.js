@@ -56,9 +56,9 @@ router.post("/api/discussion", isAuthenticated, function (req, res) {
 })
 
 router.post("/api/discussion/:id", isAuthenticated, function (req, res) {
-  db.Comment.create({ title: req.body.title, body: req.body.body })
+  db.Comment.create({ body: req.body.body })
   .then(function(dbComment) {
-    return db.Discussion.findOneAndUpdate( {_id: req.user._id}, {$push: {comment: dbComment._id}}, { new: true } )
+    return db.Discussion.findOneAndUpdate( {_id: req.params._id}, {$push: {comment: dbComment._id}}, { new: true } )
   })
   .then(function(dbDiscussion) {
     res.json(dbDiscussion)
@@ -106,29 +106,28 @@ router.get("/api/discussion", isAuthenticated, function(req, res) {
 });
 
 router.get("/api/discussion/:id", isAuthenticated, function(req, res) {
-  db.User.findOne({ _id: req.user._id })
-  .populate("discussion")
+  db.Discussion.findOne({ _id: req.params.id })
+  .populate("comment")
   .then(function(dbDiscussion) {
     res.json(dbDiscussion);
     console.log(dbDiscussion);
-    console.log(req.user.username);    
   })
   .catch(function(error) {
     res.json(err);
   });
 });
 
-router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
-  db.Discussion.deleteOne({ _id: req.params._id }),
-  console.log(req.params._id),
-  db.User.deleteOne({ _id: req.params._id })
-  .then(function(dbUser) {
-    console.log(dbUser);
-  })
-  .catch(function(error) {
-    console.log(error);
-  })
-  console.log("Discussion has been deleted");
-})
+// router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
+//   db.Discussion.deleteOne({ _id: req.params._id }),
+//   console.log(req.params._id),
+//   db.User.deleteOne({ _id: req.params._id })
+//   .then(function(dbUser) {
+//     console.log(dbUser);
+//   })
+//   .catch(function(error) {
+//     console.log(error);
+//   })
+//   console.log("Discussion has been deleted");
+// })
 
 module.exports = router;

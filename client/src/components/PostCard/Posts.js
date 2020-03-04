@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { ListGroup, Nav } from 'react-bootstrap';
 import { FormBtn } from "../Form";
-
+import API from "../../utils/API"
 import { Link } from "react-router-dom";
-import commentSection from "../../pages/Discussion/commentSection"
 
 
 export default class PostCard extends Component {
@@ -11,7 +10,6 @@ export default class PostCard extends Component {
     constructor(props) {
         super(props)
     }
-    
 
     render() {
         return (
@@ -19,30 +17,33 @@ export default class PostCard extends Component {
                 <ListGroup.Item>
                     <h5>
                         {this.props.date}
-                         : 
-                        <h2>
-                            {this.props.title}
-                        </h2>
                     </h5>
+                    <h2>
+                        {this.props.title}
+                    </h2>
 
                     <hr />
 
                     <h4>{this.props.body}</h4>
 
                     <Nav.Item>
-                        <FormBtn
-                            text="Comment"
-                            // onClick={}
-                            classes="btn-primary logoutBtn"
-                        />
+                        <Link to="/discussion/:id">
+                            <FormBtn
+                                text="Comment"
+                                // onClick={}
+                                classes="btn-primary logoutBtn"
+                            />
+                        </Link>
                         <> </>
                         <FormBtn
                             text="Delete"
-                            // onClick={}
+                            onClick={() => {
+                                this.deleteDiscussion();
+                            }}
                             classes="btn-primary logoutBtn"
                         />
                     </Nav.Item>
-                    
+
                 </ListGroup.Item>
                 <br />
             </>

@@ -20,7 +20,7 @@ export default {
     return axios.get("/api/logout");
   },
   addComment: function (discussion, comment) {
-    return axios.get(`/api/comment/${discussion.id}`, comment)
+    return axios.get(`/api/comment/${discussion._id}`, comment)
   },
   availableUN: function (username) {
     return axios.get("/api/user/?username=" + username);
@@ -28,11 +28,11 @@ export default {
   getDiscussion: function () {
     return axios.get("/api/discussion");
   },
-  // getDiscussion: function () {
-  //   return axios.get("/api/discussion/:_id");
-  // },
-  deleteDiscussion: function (id) {
-    return axios.delete("/api/discussion/" + id);
+  getOneDiscussion: function (discussions, user) {
+    return axios.get(`/api/discussion/${discussions}`, user);
+  },
+  deleteDiscussion: function (discussions, user) {
+    return axios.delete(`/api/discussion/${discussions}`, user);
   },
   findUserName: function () {
     return axios.get("/api/authorized/")

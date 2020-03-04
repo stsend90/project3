@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Discussion from "./pages/Discussion";
+import CommentSection from "./pages/CommentSection";
 import Profile from "./pages/Profile"
 import API from "./utils/API";
 
@@ -82,7 +83,7 @@ class App extends Component {
             </Route>
             <Route exact path="/discussion/:id">
               {this.state.authorized ? (
-                <Discussion logout={this.logout} />
+                <CommentSection logout={this.logout} />
               ) : (
                 <Login isAuthorized={this.isAuthorized} />
               )}

@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 const DiscussionSchema = new Schema ({
     title: {
         type:String,
-        required:true,
+        required:[true, "Name field is required"],
         unique:true
     },
     body: {
         type:String,
-        required:true,
+        required:[true, "Name field is required"],
         unique:true
     },
     comment: [{
