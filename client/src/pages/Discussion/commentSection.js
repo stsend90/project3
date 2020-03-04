@@ -1,44 +1,39 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Col, Row, Container } from "../../components/Grid";
 import NavigationBar from "../../components/navbar";
-import API from "../../utils/API"
-import Post from "./Post"
-import { InputGroup, FormControl, ListGroup } from "react-bootstrap"
+// import { Comment } from "../Comment/index";
+import { ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default class Comment extends Component {
+export default class CommentSection extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            comments: ""
+            comment: ''
         }
     }
 
-    componentDidMount() {
-        this.addComment();
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.props.addComment();
     }
 
-    addComment() {
-        
-    }
+    // get allComments(){
+    //     const { allComments } = this.props;
+    //     if(allComments.length > 0){
+    //         return allComments.map(comment => <Comment comment={comment} />)
+    //     }
+    // }
+
+
 
     render() {
-
-
-
         return (
             <div>
                 <Container fluid>
                     <NavigationBar logout={this.props.logout} />
-                    <Row>
-                        <div className="discussion-post">
-                            <h3>Comments</h3>
-                            <div>{this.state.discussions}</div>
-                        </div>
-                    </Row>
-                    
+            
                     <Row>
                         <Col size="md-12">
                             <ListGroup.Item>
@@ -53,10 +48,11 @@ export default class Comment extends Component {
                                     rows="10"
                                     value={this.state.body}
                                     onChange={this.handleInputChange}></textarea>
-                                <button className="btn-success" onClick={this.submit}>Submit</button>
+                                <button className="btn-success" onClick={this.onSubmit}>Submit</button>
                             </ListGroup.Item>
                         </Col>
                     </Row>
+                    {/* <AddComment /> */}
                 </Container>
             </div>
 

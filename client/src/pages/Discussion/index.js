@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
-import { FormBtn } from "../../components/Form";
-import Jumbotron from "../../components/Jumbotron";
 import NavigationBar from "../../components/navbar";
-import { InputGroup, Nav, ListGroup } from "react-bootstrap"
-import API from "../../utils/API"
-import Post from "./Post"
-import AddComment from "./AddComment"
+import { ListGroup } from "react-bootstrap";
+import API from "../../utils/API";
+import Posts from '../../components/PostCard/Posts';
 
 export default class Discussion extends Component {
 
@@ -16,7 +13,7 @@ export default class Discussion extends Component {
       date: '',
       title: '',
       body: '',
-      discussions: []
+      discussions: [],
     }
   }
 
@@ -44,6 +41,22 @@ export default class Discussion extends Component {
       });
   };
 
+  addComment = async (discussion_id, comment) => {
+    //TODO: API call to add comment
+    let resp = {};
+    try {
+      resp = await API.addComment(discussion_id, comment);
+    } catch (error) {
+      resp = error
+      alert("There was an error submitting your comment :(")
+      console.error(resp);
+    }
+
+    if (resp.status === 200) {
+      alert("Sucess! Your comment was submitted :)")
+    }
+  }
+
   getDiscussionCards = () => {
     API.getDiscussion()
       .then(res => {
@@ -51,7 +64,7 @@ export default class Discussion extends Component {
         console.log(myDiscussion);
 
         this.setState({
-          discussions: myDiscussion.map(discussion => <Row><Post date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
+          discussions: myDiscussion
         })
 
         console.log(this.state.myDiscussion)
@@ -59,43 +72,34 @@ export default class Discussion extends Component {
       .catch(err => console.log(err))
   }
 
+  get postCards() {
+    const { discussions } = this.state;
+    if (discussions.length > 0) {
+      return discussions.map(discussion => <Row><Posts date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
+    } else {
+      return <p>Sorry nothing to display!</p>
+    }
+  }
+
+
   render() {
     console.log("State: ", this.state)
     return (
       <div>
         <Container fluid>
           <NavigationBar logout={this.props.logout} />
-          <br />
-          <h1>History</h1>
-          <br />
-          {this.state.discussions}
-          <br />
+
+          <ListGroup.Item>
+            <br />
+            <h1>History</h1>
+            <br />
+            {this.postCards}
+            <br />
+          </ListGroup.Item>
+
           <Row>
-          <Col size="md-12">
-                            <ListGroup.Item>
-
-                                <p>{this.props.date}: <h2>{this.props.title}</h2></p>
-                                <hr />
-                                <h4>{this.props.body}</h4>
-                                <Nav.Item>
-                                    <FormBtn
-                                        text="Comment"
-                                        // onClick={}
-                                        classes="btn-primary logoutBtn"
-                                    />
-                                    <> </>
-                                    <FormBtn
-                                        text="Delete"
-                                        // onClick={}
-                                        classes="btn-primary logoutBtn"
-                                    />
-                                </Nav.Item>
-                                
-                            </ListGroup.Item>
-                            <br />
 
 
-                    </Col>
             <Col size="md-12">
               <ListGroup.Item>
 

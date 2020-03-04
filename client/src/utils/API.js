@@ -19,14 +19,14 @@ export default {
   logout: function () {
     return axios.get("/api/logout");
   },
+  addComment: function (discussion, comment) {
+    return axios.get(`/api/comment/${discussion.id}`, comment)
+  },
   availableUN: function (username) {
     return axios.get("/api/user/?username=" + username);
   },
   getDiscussion: function () {
     return axios.get("/api/discussion");
-  },
-  getComment: function () {
-    return axios.get("/api/discussion/:id");
   },
   // getDiscussion: function () {
   //   return axios.get("/api/discussion/:_id");

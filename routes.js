@@ -105,18 +105,18 @@ router.get("/api/discussion", isAuthenticated, function(req, res) {
   });
 });
 
-// router.get("/api/discussion/:id", isAuthenticated, function(req, res) {
-//   db.User.findOne({ _id: req.user._id })
-//   .populate("discussion")
-//   .then(function(dbDiscussion) {
-//     res.json(dbDiscussion);
-//     console.log(dbDiscussion);
-//     console.log(req.user.username);    
-//   })
-//   .catch(function(error) {
-//     res.json(err);
-//   });
-// });
+router.get("/api/discussion/:id", isAuthenticated, function(req, res) {
+  db.User.findOne({ _id: req.user._id })
+  .populate("discussion")
+  .then(function(dbDiscussion) {
+    res.json(dbDiscussion);
+    console.log(dbDiscussion);
+    console.log(req.user.username);    
+  })
+  .catch(function(error) {
+    res.json(err);
+  });
+});
 
 router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
   db.Discussion.deleteOne({ _id: req.params._id }),
