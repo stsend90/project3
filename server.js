@@ -28,6 +28,6 @@ mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected!!!")
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
