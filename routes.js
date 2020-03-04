@@ -117,17 +117,17 @@ router.get("/api/discussion/:id", isAuthenticated, function(req, res) {
   });
 });
 
-// router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
-//   db.Discussion.deleteOne({ _id: req.params._id }),
-//   console.log(req.params._id),
-//   db.User.deleteOne({ _id: req.params._id })
-//   .then(function(dbUser) {
-//     console.log(dbUser);
-//   })
-//   .catch(function(error) {
-//     console.log(error);
-//   })
-//   console.log("Discussion has been deleted");
-// })
+router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
+  db.Discussion.deleteOne({ _id: req.params._id }),
+  console.log(req.params._id),
+  db.User.deleteOne({ _id: req.params._id })
+  .then(function(dbUser) {
+    console.log(dbUser);
+  })
+  .catch(function(error) {
+    console.log(error);
+  })
+  console.log("Discussion has been deleted");
+})
 
 module.exports = router;

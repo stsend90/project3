@@ -11,6 +11,18 @@ export default class PostCard extends Component {
         super(props)
     }
 
+    // componentDidMount() {
+    //     this.deleteDiscussion();
+    // }
+
+    // deleteDiscussion = (id) => {
+    //     event.preventDefault();
+    //     API.deleteDiscussion(id)
+    //       .then(res => this.getDiscussionCards())
+    //       .catch(err => console.log(err));
+    // };
+
+
     render() {
         return (
             <>
@@ -30,16 +42,17 @@ export default class PostCard extends Component {
                         <Link to="/discussion/:id">
                             <FormBtn
                                 text="Comment"
-                                // onClick={}
-                                classes="btn-primary logoutBtn"
+                                // onClick={() => {
+                                
+                                // }}                                classes="btn-primary logoutBtn"
                             />
                         </Link>
                         <> </>
                         <FormBtn
                             text="Delete"
-                            onClick={() => {
-                                this.deleteDiscussion();
-                            }}
+                            // onClick={() => {
+                                
+                            // }}
                             classes="btn-primary logoutBtn"
                         />
                     </Nav.Item>

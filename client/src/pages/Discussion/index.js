@@ -10,6 +10,7 @@ export default class Discussion extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      key: '',
       date: '',
       title: '',
       body: '',
@@ -39,10 +40,6 @@ export default class Discussion extends Component {
         console.log(res);
         this.getDiscussionCards();
       });
-    this.setState({
-      title: "",
-      body: ""
-    })
   };
 
   getDiscussionCards = () => {
