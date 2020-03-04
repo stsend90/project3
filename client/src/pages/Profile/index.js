@@ -4,19 +4,35 @@ import Jumbotron from "../../components/Jumbotron";
 import NavigationBar from "../../components/navbar";
 import { InputGroup, FormControl, ListGroup } from "react-bootstrap"
 import Post from "./Post";
-import API from "../../utils/API"
+import API from "../../utils/API";
+
 
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = ({
-      discussions: []
+      discussions: [],
+      username: ""
     })
   }
 
   componentDidMount() {
     this.getDiscussionCards();
+    this.getUsername();
+  }
+
+
+  getUsername = () => {
+    API.findUserName()
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          username: res.data.username
+        })
+        
+      })
+      .catch(err => console.log(err))
   }
 
   getDiscussionCards = () => {
@@ -29,7 +45,7 @@ export default class Profile extends Component {
           discussions: myDiscussion.map(discussion => <Row><Post date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
         })
 
-        console.log(this.state.myDiscussion)
+        console.log(this.state.discussion)
       })
       .catch(err => console.log(err))
   }
@@ -51,7 +67,7 @@ export default class Profile extends Component {
         <Container fluid>
           <NavigationBar logout={this.props.logout} />
           <br />
-          <h1>History</h1>
+          <h1>{this.state.username}</h1>
           <br />
           {this.state.discussions}
           <br />
