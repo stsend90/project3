@@ -34,4 +34,7 @@ export default {
   deleteDiscussion: function (id) {
     return axios.delete("/api/discussion/" + id);
   },
+  findUserName: function () {
+    return axios.get("/api/authorized/")
+  }
 };

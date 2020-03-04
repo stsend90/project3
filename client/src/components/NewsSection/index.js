@@ -2,6 +2,8 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import NewsCard from './newsCard';
 import CardDeck from 'react-bootstrap/CardDeck';
+import './style.css'
+
 
 
 class ControlledCard extends React.Component {
@@ -48,7 +50,14 @@ class ControlledCard extends React.Component {
                     />
               )
           });
-          return <CardDeck>{CardItems}</CardDeck>;
+          return (
+          
+                <Card className="newsContainer">
+                      <Card.Header id="newsHeader" as="h2">Brewery News</Card.Header>
+                      <CardDeck>{CardItems}</CardDeck>
+                    
+                </Card>
+          )
       }
 
       render(){
