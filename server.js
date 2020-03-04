@@ -22,7 +22,15 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/project3", { useNewUrlParser: true });
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/project3";
+const options = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+};
+
+mongoose.connect(MONGODB_URI, options);
 
 mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected!!!")
