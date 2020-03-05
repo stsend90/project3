@@ -19,6 +19,7 @@ export default class Profile extends Component {
   componentDidMount() {
     this.getDiscussionCards();
     this.getUsername();
+    this.getSavedArticles();
   }
 
 
@@ -61,6 +62,17 @@ export default class Profile extends Component {
       return <p>Sorry, no discussions to display!</p>
     }
   }
+
+  getSavedArticles = ()  => {
+    API.savedArticles()
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          articles: res.data.articles
+        })
+      })
+      .catch(err => console.log(err))
+  }
  
   render() {
     return (
@@ -74,6 +86,7 @@ export default class Profile extends Component {
             <br />
             {this.postCards}
             <br />
+            {this.articles}
           </ListGroup.Item>
         </Container>
       </div>

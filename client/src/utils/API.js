@@ -36,5 +36,11 @@ export default {
   },
   findUserName: function () {
     return axios.get("/api/authorized/")
+  },
+  savedArticles: function () {
+    return axios.get("/api/Articles/")
+  },
+  saveArticle: function (article) {
+    return axios.post("/api/Articles/", article)
   }
 };
