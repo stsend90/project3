@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import NewsCard from './newsCard';
 import CardDeck from 'react-bootstrap/CardDeck';
 import './style.css'
+import API from '../../utils/API'
 
 
 
@@ -41,13 +42,27 @@ class ControlledCard extends React.Component {
           
       };
 
+      saveArticle = article => {
+        console.log(article.title);
+        console.log(article.url);
+        API.saveArticle({
+            title: article.title,
+            url: article.url
+        })
+        .then(res => {
+            console.log(res)
+            console.log("saved")
+        })
+      }
+
       renderCard = () => {
           const CardItems = this.state.items.slice(0, 5).map(article => {
               return (
                   <NewsCard
                     key={article.publishedAt}
                     article={article}
-                    />
+                    saveArticle={this.saveArticle}
+                  />
               )
           });
           return (
