@@ -34,10 +34,6 @@ export default class Profile extends Component {
       .catch(err => console.log(err))
   }
 
-  addComment() {
-    // TODO: API call to make comments
-  }
-
   getDiscussionCards = () => {
     API.getDiscussion()
       .then(res => {
@@ -48,7 +44,7 @@ export default class Profile extends Component {
           discussions: myDiscussion
         })
 
-        console.log(this.state.discussion)
+        console.log(this.state.discussions)
       })
       .catch(err => console.log(err))
   }
@@ -56,9 +52,9 @@ export default class Profile extends Component {
   get postCards() {
     const { discussions } = this.state;
     if (discussions.length > 0) {
-      return discussions.map(discussion => <Row><Posts date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
+      return discussions.map(discussion => <Row key={discussion._id}><Posts date={discussion.created} discussion_id={discussion._id} title={discussion.title} body={discussion.body} /></Row>)
     } else {
-      return <p>Sorry, no discussions to display!</p>
+      return <p>Sorry nothing to display!</p>
     }
   }
  

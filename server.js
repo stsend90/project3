@@ -7,7 +7,6 @@ const session = require("express-session");
 const passport = require("./config/passport");
 require("dotenv").config();
 
-
 app.use(session({ secret: process.env.PASSPORT_SECRET, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());

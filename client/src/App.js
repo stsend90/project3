@@ -11,15 +11,33 @@ import Home from "./pages/Home";
 import Discussion from "./pages/Discussion";
 import CommentSection from "./pages/CommentSection";
 import Profile from "./pages/Profile"
+// import { discussionDetail } from "./components/discussionDetail";
 import API from "./utils/API";
 
 class App extends Component {
   state = {
-    authorized: false
+    authorized: false,
+    singleComment: {}
   };
 
   componentDidMount() {
     this.isAuthorized();
+  }
+
+  // onClickComment(discussion_id){
+  //   // API call to get single post data
+  //   console.log(discussion_id);
+  // }
+  onClickComment = (discussion_id) => {
+    console.log(discussion_id);
+
+    return this.setState({
+      post: {
+        title: 'abc',
+        date: '223',
+        _id:'223'
+      }
+    })
   }
 
   isAuthorized = () => {
@@ -76,14 +94,14 @@ class App extends Component {
             </Route>
             <Route exact path="/discussion">
               {this.state.authorized ? (
-                <Discussion logout={this.logout} />
+                <Discussion logout={this.logout} onClickComment={this.onClickComment} />
               ) : (
                 <Login isAuthorized={this.isAuthorized} />
               )}
             </Route>
             <Route exact path="/discussion/:id">
               {this.state.authorized ? (
-                <CommentSection logout={this.logout} />
+                <CommentSection logout={this.logout} post={this.state.post} />
               ) : (
                 <Login isAuthorized={this.isAuthorized} />
               )}

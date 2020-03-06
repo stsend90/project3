@@ -49,9 +49,9 @@ router.post("/api/discussion", isAuthenticated, function (req, res) {
   .then(function(dbUser) {
     res.json(dbUser)
   })
-  .catch(function(error) {
-    console.log(error);
-    res.json(error);
+  .catch(function(err) {
+    console.log(err);
+    res.json(err);
   })
 })
 
@@ -63,9 +63,9 @@ router.post("/api/discussion/:id", isAuthenticated, function (req, res) {
   .then(function(dbDiscussion) {
     res.json(dbDiscussion)
   })
-  .catch(function(error) {
-    console.log(error);
-    res.json(error);
+  .catch(function(err) {
+    console.log(err);
+    res.json(err);
   })
 })
 
@@ -97,22 +97,21 @@ router.get("/api/discussion", isAuthenticated, function(req, res) {
   .populate("discussion")
   .then(function(dbDiscussion) {
     res.json(dbDiscussion);
-    console.log(dbDiscussion);
-    console.log(req.user.username);    
+    console.log(dbDiscussion);   
   })
-  .catch(function(error) {
+  .catch(function(err) {
     res.json(err);
   });
 });
 
 router.get("/api/discussion/:id", isAuthenticated, function(req, res) {
   db.Discussion.findOne({ _id: req.params.id })
-  .populate("comment")
+  .populate("Comment")
   .then(function(dbDiscussion) {
     res.json(dbDiscussion);
     console.log(dbDiscussion);
   })
-  .catch(function(error) {
+  .catch(function(err) {
     res.json(err);
   });
 });
@@ -124,8 +123,8 @@ router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
   .then(function(dbUser) {
     console.log(dbUser);
   })
-  .catch(function(error) {
-    console.log(error);
+  .catch(function(err) {
+    console.log(err);
   })
   console.log("Discussion has been deleted");
 })
