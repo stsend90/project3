@@ -1,0 +1,10 @@
+.newsContainer {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#newsHeader {
+    position: relative;
+    height: 80px;
+
+}

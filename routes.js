@@ -147,7 +147,7 @@ router.post("/api/Articles/", isAuthenticated, function (req, res) {
 
 router.get("/api/Articles", isAuthenticated, function(req, res) {
   db.User.findOne({ _id: req.user._id })
-  .populate("Articles")
+  .populate("article")
   .then(function(dbArticle) {
     res.json(dbArticle);
     console.log(dbArticle);    
@@ -159,7 +159,7 @@ router.get("/api/Articles", isAuthenticated, function(req, res) {
 
 router.get("/api/Articles/:id", isAuthenticated, function(req, res) {
   db.User.findOne({ _id: req.user._id })
-  .populate("Articles")
+  .populate("article")
   .then(function(dbArticle) {
     res.json(dbArticle);
     console.log(dbArticle);   

@@ -37,8 +37,8 @@ export default {
   findUserName: function () {
     return axios.get("/api/authorized/")
   },
-  savedArticles: function () {
-    return axios.get("/api/Articles/")
+  savedArticles: function (article) {
+    return axios.get("/api/Articles/", article)
   },
   saveArticle: function (article) {
     return axios.post("/api/Articles/", article)
