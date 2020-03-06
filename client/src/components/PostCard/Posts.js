@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
 import { ListGroup, Nav } from 'react-bootstrap';
 import { FormBtn } from "../Form";
-import API from "../../utils/API"
 import { Link } from "react-router-dom";
-
 
 export default class PostCard extends Component {
 
-    constructor(props) {
+
+    constructor(props){
         super(props)
     }
 
-    // componentDidMount() {
-    //     this.deleteDiscussion();
-    // }
-
-    // deleteDiscussion = (id) => {
-    //     event.preventDefault();
-    //     API.deleteDiscussion(id)
-    //       .then(res => this.getDiscussionCards())
-    //       .catch(err => console.log(err));
-    // };
-
+    onClickComment(){
+        this.props.getCommentSection(this.props.discussion_id)
+    }
 
     render() {
         return (
@@ -39,20 +30,19 @@ export default class PostCard extends Component {
                     <h4>{this.props.body}</h4>
 
                     <Nav.Item>
-                        <Link to="/discussion/:id">
+                        <Link to={`/discussion/${this.props.discussion_id}`}>
                             <FormBtn
                                 text="Comment"
-                                // onClick={() => {
-                                
-                                // }}                                classes="btn-primary logoutBtn"
+                                classes="btn-primary logoutBtn"
+                                onClick={() => {
+                                    this.onClickComment()
+                                }}                           
                             />
                         </Link>
                         <> </>
                         <FormBtn
                             text="Delete"
-                            // onClick={() => {
-                                
-                            // }}
+                            // onClick={this.props.deleteDiscussion}
                             classes="btn-primary logoutBtn"
                         />
                     </Nav.Item>

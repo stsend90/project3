@@ -20,6 +20,7 @@ export default class Discussion extends Component {
 
   componentDidMount() {
     this.getDiscussionCards();
+    console.log(this.props)
   }
 
   handleInputChange = (event) => {
@@ -39,20 +40,18 @@ export default class Discussion extends Component {
       .then(res => {
         console.log(res);
         this.getDiscussionCards();
-      });
+      })
+      .catch(err => console.log("not sent: ", err))
   };
 
   getDiscussionCards = () => {
     API.getDiscussion()
       .then(res => {
         let myDiscussion = res.data.discussion;
-        console.log(myDiscussion);
-
         this.setState({
           discussions: myDiscussion
         })
 
-        console.log(this.state.discussions)
       })
       .catch(err => console.log(err))
   }
@@ -60,7 +59,7 @@ export default class Discussion extends Component {
   get postCards() {
     const { discussions } = this.state;
     if (discussions.length > 0) {
-      return discussions.map(discussion => <Row><Posts discId={discussion._id} date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
+      return discussions.map(discussion => <Row key={discussion._id}><Posts getCommentSection={this.props.onClickComment} date={discussion.created} discussion_id={discussion._id} title={discussion.title} body={discussion.body} /></Row>)
     } else {
       return <p>Sorry nothing to display!</p>
     }
@@ -68,7 +67,6 @@ export default class Discussion extends Component {
 
 
   render() {
-    console.log("State: ", this.state)
     return (
       <div>
         <Container fluid>

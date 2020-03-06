@@ -2,22 +2,21 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "../../components/Grid";
 import NavigationBar from "../../components/navbar";
 import { ListGroup } from "react-bootstrap";
-import Posts from '../../components/PostCard/Posts';
 import API from "../../utils/API";
+import RenderDetails from "../../components/discussionDetail/discussionDetail";
 
 export default class CommentSection extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      body: "",
-      comments: []
+      key: '',
+      date: '',
+      body: '',
+      discussions: "",
     }
   }
-
-  // componentDidMount() {
-  //   this.getOneDiscussion();
-  // }
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -29,34 +28,23 @@ export default class CommentSection extends Component {
 
 
 
-  // getOneDiscussion = () => {
-  //   API.getOneDiscussion()
-  //   .then(res => {
-  //     let oneDiscussion = res.data.discussion;
-  //     console.log(oneDiscussion)
-  //     this.setState({
-  //       discussions: oneDiscussion
-  //     })
+  get postSingle() {
+    const { post } = this.props;
+    // console.log(this.state)
+    if (post) {
+      return <RenderDetails key={post._id} discussion_id={post._id} date={post.created} title={post.title} body={post.body} />
+    } else {
+      return <p>Sorry nothing to display!</p>
+    }
+  }
 
-  //     console.log(this.state.discussions)
-  //   })
-  //   .catch(err => console.log(err))
-  // }
-
-  // get postSingle() {
-  //   const { discussions } = this.state;
-  //   if (discussions.length > 0) {
-  //     return discussions.map(discussion => <Row><Posts date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
-  //   } else {
-  //     return <p>Sorry nothing to display!</p>
-  //   }
-  // }
-
-  // addComment = async (discussions_id, comments) => {
+  // addComment = async (discussions, comments) => {
   //   //TODO: API call to add comment
   //   let resp = {};
   //   try {
-  //     resp = await API.addComment(discussions_id, comments);
+  //     resp = await API.addComment({
+  //       body: this.state.body
+  //     });
   //   } catch (error) {
   //     resp = error
   //     alert("There was an error submitting your comment :(")
@@ -73,14 +61,17 @@ export default class CommentSection extends Component {
 
     return (
       <>
-      <Container fluid>
-        <NavigationBar logout={this.props.logout} />
+        <Container fluid>
+          <NavigationBar logout={this.props.logout} />
+          <br />
+          <ListGroup.Item>
+            <h1>Hello</h1>
+            <hr />
+            {this.postSingle}
 
-        <ListGroup.Item>
-          <h1>Hello World!</h1>
-          {this.postSingle}
-        </ListGroup.Item>
-        <Row>
+          </ListGroup.Item>
+          <br />
+          <Row>
 
 
             <Col size="md-12">
@@ -96,7 +87,7 @@ export default class CommentSection extends Component {
               </ListGroup.Item>
             </Col>
           </Row>
-      </Container>
+        </Container>
       </>
     )
   }

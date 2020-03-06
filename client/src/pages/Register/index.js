@@ -23,7 +23,7 @@ class Register extends Component {
   validateField = (name, value) => {
     switch (name) {
       case "username":
-        if (value.length > 7) {
+        if (value.length > 5) {
           API.availableUN(value.toLowerCase())
             .then(res => {
               console.log(res);
