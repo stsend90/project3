@@ -19,7 +19,7 @@ class ControlledCard extends React.Component {
     
 
     componentDidMount() {
-        fetch("http://newsapi.org/v2/everything?" + "q=breweries&" + "sortBy=relevancy&" + "apiKey=b504cfeca75d426188bed3c20f49bf93")
+        fetch("https://newsapi.org/v2/everything?" + "q=breweries&" + "sortBy=relevancy&" + "apiKey=b504cfeca75d426188bed3c20f49bf93")
           .then(res => res.json())
           .then(
             (result) => {
