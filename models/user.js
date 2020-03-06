@@ -14,6 +14,11 @@ const User = new Schema({
     discussion: [{
         type: Schema.Types.ObjectId,
         ref: "Discussion"
+    }],
+
+    article: [{
+        type: Schema.Types.ObjectId,
+        ref: "Articles"
     }]
 });
 

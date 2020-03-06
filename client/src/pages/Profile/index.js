@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Container, Row } from "../../components/Grid";
 import NavigationBar from "../../components/navbar";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Card, CardDeck } from "react-bootstrap";
 import Posts from '../../components/PostCard/Posts';
 import API from "../../utils/API";
+import NewsCard from '../../components/NewsSection/newsCard'
+import './style.css'
+import SavedArticle from "./savedArticle";
 
 
 
@@ -12,13 +15,16 @@ export default class Profile extends Component {
     super(props);
     this.state = ({
       discussions: [],
-      username: ""
+      username: "",
+      articles: []
     })
   }
 
   componentDidMount() {
     this.getDiscussionCards();
     this.getUsername();
+    this.getSavedArticles();
+    this.renderArticle();
   }
 
 
@@ -27,7 +33,7 @@ export default class Profile extends Component {
       .then(res => {
         console.log(res.data)
         this.setState({
-          username: res.data.username
+          username: res.data.username,
         })
         
       })
@@ -57,6 +63,35 @@ export default class Profile extends Component {
       return <p>Sorry nothing to display!</p>
     }
   }
+
+  getSavedArticles = ()  => {
+    API.savedArticles()
+      .then(res => {
+        console.log(res.data.article)
+        this.setState({
+          articles: res.data.article
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
+  renderArticle = () => {
+    const articleItems = this.state.articles.map(articles => {
+      return (
+        <SavedArticle
+          key={articles._id}
+          article={articles}
+        />
+      )
+    });
+    return (
+      <Card className="newsContainer">
+        <Card.Header id="newsHeader" as="h2">Your saved articles</Card.Header>
+        <CardDeck>{articleItems}</CardDeck>
+    
+      </Card>
+    )
+  }
  
   render() {
     return (
@@ -70,6 +105,7 @@ export default class Profile extends Component {
             <br />
             {this.postCards}
             <br />
+            {this.renderArticle()}
           </ListGroup.Item>
         </Container>
       </div>
