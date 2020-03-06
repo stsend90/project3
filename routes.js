@@ -1,5 +1,6 @@
 const passport = require("passport");
 const express = require("express");
+const path = require("path");
 const router = express.Router();
 const db = require("./models");
 var isAuthenticated = require("./config/middleware/isAuthenticated");
@@ -179,6 +180,10 @@ router.delete("/api/Articles/:id", isAuthenticated, function(req, res) {
     console.log(error);
   })
   console.log("Article has been deleted");
+})
+
+router.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"))
 })
 
 module.exports = router;

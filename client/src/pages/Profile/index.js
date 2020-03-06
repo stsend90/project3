@@ -14,6 +14,10 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = ({
+      key: '',
+      date: '',
+      title: '',
+      body: '',
       discussions: [],
       username: "",
       articles: []
@@ -58,7 +62,7 @@ export default class Profile extends Component {
   get postCards() {
     const { discussions } = this.state;
     if (discussions.length > 0) {
-      return discussions.map(discussion => <Row key={discussion._id}><Posts date={discussion.created} discussion_id={discussion._id} title={discussion.title} body={discussion.body} /></Row>)
+      return discussions.map(discussion => <Row key={discussion._id}><Posts getCommentSection={this.props.onClickComment} date={discussion.created} discussion_id={discussion._id} title={discussion.title} body={discussion.body} /></Row>)
     } else {
       return <p>Sorry nothing to display!</p>
     }
