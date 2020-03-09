@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row } from "../../components/Grid";
+import { Container, Row, Col } from "../../components/Grid";
 import NavigationBar from "../../components/navbar";
 import { ListGroup, Card, CardDeck } from "react-bootstrap";
 import Posts from '../../components/PostCard/Posts';
@@ -31,11 +31,30 @@ export default class Profile extends Component {
     this.renderArticle();
   }
 
+  submit = (event) => {
+    event.preventDefault();
+    API.submit({
+      title: this.state.title,
+      body: this.state.body
+    })
+      .then(res => {
+        console.log(res);
+        this.getDiscussionCards();
+      })
+      .catch(err => console.log("not sent: ", err))
+  };
+
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    this.setState({
+      [name]: value
+    })
+  };
 
   getUsername = () => {
     API.findUserName()
       .then(res => {
-        console.log(res.data)
         this.setState({
           username: res.data.username,
         })
@@ -48,13 +67,11 @@ export default class Profile extends Component {
     API.getDiscussion()
       .then(res => {
         let myDiscussion = res.data.discussion;
-        console.log(myDiscussion);
 
         this.setState({
           discussions: myDiscussion
         })
 
-        console.log(this.state.discussions)
       })
       .catch(err => console.log(err))
   }
@@ -111,6 +128,26 @@ export default class Profile extends Component {
             <br />
             {this.renderArticle()}
           </ListGroup.Item>
+          <Row>
+
+
+            <Col size="md-12">
+              <ListGroup.Item>
+
+                <label className="exampleFormControlTextarea1"><h3>Post a topic</h3></label>
+                <input className="form-control" type="text" placeholder="Title" name="title"
+                  placeholder="Title"
+                  value={this.state.title}
+                  onChange={this.handleInputChange} />
+                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" name="body"
+                  cols="30"
+                  rows="10"
+                  value={this.state.body}
+                  onChange={this.handleInputChange}></textarea>
+                <button className="btn-success" onClick={this.submit}>Submit</button>
+              </ListGroup.Item>
+            </Col>
+          </Row>
         </Container>
       </div>
     );

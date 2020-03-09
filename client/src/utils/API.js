@@ -16,8 +16,8 @@ export default {
   logout: function () {
     return axios.get("/api/logout");
   },
-  // addComment: function (discussions, comment) {
-  //   return axios.get(`/api/comment/${discussions._id}`, comment)
+  // addComment: function (data) {
+  //   return axios.get("/api/discussion/:id", data)
   // },
   availableUN: function (username) {
     return axios.get("/api/user/?username=" + username);
@@ -25,8 +25,11 @@ export default {
   getDiscussion: function () {
     return axios.get("/api/discussion");
   },
-  getOneDiscussion: function (id) {
-    return axios.get(`/api/discussion/${id}`);
+  getDiscussions: function (user) {
+    return axios.get("/api/discussions", user);
+  },
+  onClickComment: function(id) {
+    return axios.get(`/api/discussion/${id}`)
   },
   deleteDiscussion: function (id) {
     return axios.delete(`/api/discussion/:id`, id);

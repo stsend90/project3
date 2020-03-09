@@ -14,7 +14,7 @@ export default class CommentSection extends Component {
       key: '',
       date: '',
       body: '',
-      discussions: "",
+      comments: "",
     }
   }
 
@@ -30,7 +30,6 @@ export default class CommentSection extends Component {
 
   get postSingle() {
     const { post } = this.props;
-    // console.log(this.state)
     if (post) {
       return <RenderDetails key={post._id} discussion_id={post._id} date={post.created} title={post.title} body={post.body} />
     } else {
@@ -38,23 +37,9 @@ export default class CommentSection extends Component {
     }
   }
 
-  // addComment = async (discussions, comments) => {
-  //   //TODO: API call to add comment
-  //   let resp = {};
-  //   try {
-  //     resp = await API.addComment({
-  //       body: this.state.body
-  //     });
-  //   } catch (error) {
-  //     resp = error
-  //     alert("There was an error submitting your comment :(")
-  //     console.error(resp);
-  //   }
-
-  //   if (resp.status === 200) {
-  //     alert("Sucess! Your comment was submitted :)")
-  //   }
-  // }
+  get deletePost() {
+    console.log(this.props)
+  }
 
   render() {
 
@@ -65,8 +50,7 @@ export default class CommentSection extends Component {
           <NavigationBar logout={this.props.logout} />
           <br />
           <ListGroup.Item>
-            <h1>Hello</h1>
-            <hr />
+          
             {this.postSingle}
 
           </ListGroup.Item>

@@ -16,6 +16,7 @@ export default class RenderDetail extends Component {
             <>
                 <ListGroup.Item>
                     <h5>
+                        {this.props.username}
                         {this.props.date}
                     </h5>
                     <h2>

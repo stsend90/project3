@@ -93,6 +93,16 @@ router.get("/api/authorized", isAuthenticated, function(req, res) {
   res.json(req.user);
 });
 
+router.get("/api/discussions", isAuthenticated, function(req, res) {
+  db.Discussion.find({})
+  .then(function(dbUser){
+    res.json(dbUser);
+  })
+  .catch(function(err) {
+    res.json(err)
+  });
+});
+
 router.get("/api/discussion", isAuthenticated, function(req, res) {
   db.User.findOne({ _id: req.user._id })
   .populate("discussion")

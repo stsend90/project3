@@ -42,8 +42,9 @@ export default class PostCard extends Component {
                         <> </>
                         <FormBtn
                             text="Delete"
-                            // onClick={this.props.deleteDiscussion}
                             classes="btn-primary logoutBtn"
+                            // onClick={() => {
+                            // }} 
                         />
                     </Nav.Item>
 

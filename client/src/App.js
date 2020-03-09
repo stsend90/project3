@@ -24,21 +24,24 @@ class App extends Component {
     this.isAuthorized();
   }
 
-  // onClickComment(discussion_id){
-  //   // API call to get single post data
-  //   console.log(discussion_id);
-  // }
   onClickComment = (discussion_id) => {
-    console.log(discussion_id);
-
-    return this.setState({
-      post: {
-        title: 'abc',
-        date: '223',
-        _id:'223'
-      }
+    API.onClickComment(discussion_id)
+    .then(res => {
+      console.log(res)
+      return this.setState({
+        post: {
+        title: res.data.title,
+        body: res.data.body,
+        date: res.data.created,
+        _id: res.data._id
+        }
+      })
     })
-  }
+    .catch(err => {
+      console.log(err);
+      this.setState({ authorized: false });
+    });
+  }  
 
   isAuthorized = () => {
     API.isAuthorized()
@@ -92,7 +95,7 @@ class App extends Component {
                 <Register isAuthorized={this.isAuthorized} />
               )}
             </Route>
-            <Route exact path="/discussion">
+            <Route exact path="/discussions">
               {this.state.authorized ? (
                 <Discussion logout={this.logout} onClickComment={this.onClickComment} />
               ) : (
@@ -108,7 +111,7 @@ class App extends Component {
             </Route>
             <Route exact path="/profile">
               {this.state.authorized ? (
-                <Profile logout={this.logout} />
+                <Profile logout={this.logout} onClickComment={this.onClickComment} />
               ) : (
                 <Login isAuthorized={this.isAuthorized} />
               )}

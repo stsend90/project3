@@ -4,6 +4,7 @@ import NavigationBar from "../../components/navbar";
 import { ListGroup } from "react-bootstrap";
 import API from "../../utils/API";
 import Posts from '../../components/PostCard/Posts';
+import RenderDetail from "../../components/discussionDetail/discussionDetail"
 
 export default class Discussion extends Component {
 
@@ -11,57 +12,32 @@ export default class Discussion extends Component {
     super(props);
     this.state = {
       key: '',
-      date: '',
-      title: '',
-      body: '',
+      username: [],
       discussions: [],
     }
   }
 
   componentDidMount() {
-    this.getDiscussionCards();
-    console.log(this.props)
+    this.getDiscussions();
+    this.renderDiscussions();
   }
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    this.setState({
-      [name]: value
-    })
-  };
-
-  submit = (event) => {
-    event.preventDefault();
-    API.submit({
-      title: this.state.title,
-      body: this.state.body
-    })
+  getDiscussions = () => {
+    API.getDiscussions()
       .then(res => {
-        console.log(res);
-        this.getDiscussionCards();
-      })
-      .catch(err => console.log("not sent: ", err))
-  };
-
-  getDiscussionCards = () => {
-    API.getDiscussion()
-      .then(res => {
-        let myDiscussion = res.data.discussion;
+        let allDiscussions = res.data
         this.setState({
-          discussions: myDiscussion
+          discussions: allDiscussions
         })
-
+        console.log(allDiscussions)
       })
       .catch(err => console.log(err))
   }
 
-  get postCards() {
+  renderDiscussions = () => {
     const { discussions } = this.state;
     if (discussions.length > 0) {
-      return discussions.map(discussion => <Row key={discussion._id}><Posts getCommentSection={this.props.onClickComment} date={discussion.created} discussion_id={discussion._id} title={discussion.title} body={discussion.body} /></Row>)
-    } else {
-      return <p>Sorry nothing to display!</p>
+      return discussions.map(discussion => <Row key={discussion._id}><RenderDetail getCommentSection={this.props.onClickComment} date={discussion.created} title={discussion.title} body={discussion.body} /></Row>)
     }
   }
 
@@ -76,7 +52,7 @@ export default class Discussion extends Component {
             <br />
             <h1>History</h1>
             <br />
-            {this.postCards}
+            {this.renderDiscussions()}
             <br />
           </ListGroup.Item>
 

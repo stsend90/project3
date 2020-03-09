@@ -25,7 +25,7 @@ export const NavigationBar = ({ logout }) => (
                 <Nav className="ml-auto">
                     <Nav.Item>
                         <Navbar.Brand href="/">Home</Navbar.Brand>
-                        <Navbar.Brand href="/discussion">Discussion</Navbar.Brand>
+                        <Navbar.Brand href="/discussions">Discussion</Navbar.Brand>
                         <Navbar.Brand href="/profile">Profile</Navbar.Brand>
                         <FormBtn
                             text="Logout"
