@@ -55,27 +55,7 @@ export default class Discussion extends Component {
             {this.renderDiscussions()}
             <br />
           </ListGroup.Item>
-
-          <Row>
-
-
-            <Col size="md-12">
-              <ListGroup.Item>
-
-                <label className="exampleFormControlTextarea1"><h3>Post a topic</h3></label>
-                <input className="form-control" type="text" placeholder="Title" name="title"
-                  placeholder="Title"
-                  value={this.state.title}
-                  onChange={this.handleInputChange} />
-                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" name="body"
-                  cols="30"
-                  rows="10"
-                  value={this.state.body}
-                  onChange={this.handleInputChange}></textarea>
-                <button className="btn-success" onClick={this.submit}>Submit</button>
-              </ListGroup.Item>
-            </Col>
-          </Row>
+          
         </Container>
       </div>
     );
