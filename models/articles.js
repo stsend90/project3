@@ -11,6 +11,10 @@ const ArticleSchema = new Schema ({
         unique:true
     },
     
+    image: {
+        type:String,
+    },
+    
     created: { type: Date, required: true, default: Date.now() },
 
 })

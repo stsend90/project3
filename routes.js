@@ -132,7 +132,7 @@ router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
 
 router.post("/api/Articles/", isAuthenticated, function (req, res) {
   console.log(req.body);
-  db.Articles.create({ title: req.body.title, url: req.body.url })
+  db.Articles.create({ title: req.body.title, url: req.body.url, image: req.body.urlToImage })
   .then(function(dbArticle) {
     return db.User.findOneAndUpdate( {_id: req.user._id}, {$push: {article: dbArticle._id}}, { new: true } )
   })

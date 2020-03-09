@@ -45,9 +45,11 @@ class ControlledCard extends React.Component {
       saveArticle = article => {
         console.log(article.title);
         console.log(article.url);
+        console.log(article.urlToImage)
         API.saveArticle({
             title: article.title,
-            url: article.url
+            url: article.url,
+            image: article.urlToImage
         })
         .then(res => {
             console.log(res)
