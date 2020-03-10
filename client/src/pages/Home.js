@@ -15,7 +15,7 @@ function Home({logout}) {
       <Row>
         <Col size="md-12">
           <Jumbotron>
-            <h1>Welcome to the Home Page</h1>
+    
           </Jumbotron>
           <ControlledSearch />
           <ControlledCard />

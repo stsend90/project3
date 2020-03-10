@@ -1,0 +1,9 @@
+.jumbotron{
+    background-image: url(../images/brewery_banner.jpg);
+    background-size: cover;
+    text-decoration-color: white;
+}
+
+.jumboText {
+    color: white;
+}
