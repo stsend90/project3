@@ -12,10 +12,7 @@ const DiscussionSchema = new Schema ({
         required:[true, "Name field is required"],
         unique:true
     },
-    comment: [{
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
-    }],
+    
     created: { type: Date, required: true, default: Date.now() },
 
 })

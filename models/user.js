@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const User = new Schema({
+    id: Schema.Types.ObjectId,
     email: {
         type: String,
         required: 'Email address is required',
@@ -14,6 +15,11 @@ const User = new Schema({
     discussion: [{
         type: Schema.Types.ObjectId,
         ref: "Discussion"
+    }],
+
+    comment: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
     }],
 
     article: [{

@@ -42,6 +42,10 @@ export default class Profile extends Component {
         this.getDiscussionCards();
       })
       .catch(err => console.log("not sent: ", err))
+      this.setState({
+        title: "",
+        body: ""
+      })
   };
 
   handleInputChange = (event) => {

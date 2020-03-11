@@ -14,6 +14,10 @@ export default class PostCard extends Component {
         this.props.getCommentSection(this.props.discussion_id)
     }
 
+    deleteDiscussion = () => {
+        this.props.getCommentSection(this.props.discussion_id)
+    }
+
     render() {
         return (
             <>
@@ -43,8 +47,9 @@ export default class PostCard extends Component {
                         <FormBtn
                             text="Delete"
                             classes="btn-primary logoutBtn"
-                            // onClick={() => {
-                            // }} 
+                            onClick={() => {
+                                this.deleteDiscussion()
+                            }} 
                         />
                     </Nav.Item>
 

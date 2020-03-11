@@ -11,7 +11,6 @@ import Home from "./pages/Home";
 import Discussion from "./pages/Discussion";
 import CommentSection from "./pages/CommentSection";
 import Profile from "./pages/Profile"
-// import { discussionDetail } from "./components/discussionDetail";
 import API from "./utils/API";
 
 class App extends Component {
@@ -27,13 +26,12 @@ class App extends Component {
   onClickComment = (discussion_id) => {
     API.onClickComment(discussion_id)
     .then(res => {
-      console.log(res)
       return this.setState({
         post: {
-        title: res.data.title,
-        body: res.data.body,
-        date: res.data.created,
-        _id: res.data._id
+          title: res.data.title,
+          body: res.data.body,
+          date: res.data.created,
+          _id: res.data._id
         }
       })
     })
