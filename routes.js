@@ -45,7 +45,7 @@ router.post("/api/login", function(req, res, next) {
 router.post("/api/discussion", isAuthenticated, function (req, res) {
   db.Discussion.create({ title: req.body.title, body: req.body.body })
   .then(function(dbDiscussion) {
-    return db.User.findOneAndUpdate( {_id: req.user._id}, {$push: {discussion: dbDiscussion._id}}, { new: true } )
+    return db.User.findOneAndUpdate( { _id: req.user._id }, {$push: {discussion: dbDiscussion._id}}, { new: true } )
   })
   .then(function(dbUser) {
     res.json(dbUser)
@@ -59,13 +59,12 @@ router.post("/api/discussion", isAuthenticated, function (req, res) {
 router.post("/api/discussion/:id", isAuthenticated, function (req, res) {
   db.Comment.create({ body: req.body.body })
   .then(function(dbComment) {
-    return db.Discussion.findOneAndUpdate( {_id: req.params._id}, {$push: {comment: dbComment._id}}, { new: true } )
+    return db.User.findOneAndUpdate( { _id: req.user._id }, {$push: {comment: dbComment._id}}, { new: true } )
   })
-  .then(function(dbDiscussion) {
-    res.json(dbDiscussion)
+  .then(function(dbUser) {
+    res.json(dbUser)
   })
   .catch(function(err) {
-    console.log(err);
     res.json(err);
   })
 })
@@ -129,8 +128,7 @@ router.get("/api/discussion/:id", isAuthenticated, function(req, res) {
 
 router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
   db.Discussion.deleteOne({ _id: req.params._id }),
-  console.log(req.params._id),
-  db.User.deleteOne({ _id: req.params._id })
+  console.log(req.params._id)
   .then(function(dbUser) {
     console.log(dbUser);
   })

@@ -50,8 +50,8 @@ export default class Discussion extends Component {
 
           <ListGroup.Item>
             <br />
-            <h1>History</h1>
-            <br />
+            <h1>Discussions</h1>
+            <hr />
             {this.renderDiscussions()}
             <br />
           </ListGroup.Item>

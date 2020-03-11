@@ -11,10 +11,10 @@ export default class CommentSection extends Component {
     super(props);
 
     this.state = {
-      key: '',
-      date: '',
-      body: '',
-      comments: "",
+      key: "",
+      date: "",
+      body: "",
+      comments: [],
     }
   }
 
@@ -25,6 +25,34 @@ export default class CommentSection extends Component {
       [name]: value
     })
   };
+
+  addComment = (id) => {
+    id.preventDefault();
+    API.addComment({
+      body: this.state.body
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+    this.setState({
+      body: ""
+    })
+  }
+
+  // getComments = () => {
+  //   API.getComments()
+  //   .then(res => {
+  //     let allComments = res.data
+  //       this.setState({
+  //         comments: allComments
+  //       })
+  //     console.log(allComments)
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //   })
+  // }
 
 
 
@@ -37,12 +65,7 @@ export default class CommentSection extends Component {
     }
   }
 
-  get deletePost() {
-    console.log(this.props)
-  }
-
   render() {
-
 
     return (
       <>
@@ -55,6 +78,11 @@ export default class CommentSection extends Component {
 
           </ListGroup.Item>
           <br />
+          <ListGroup.Item>
+          
+            {this.getComments}
+
+          </ListGroup.Item>
           <Row>
 
 

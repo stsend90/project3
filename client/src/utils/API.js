@@ -10,15 +10,15 @@ export default {
   submit: function (data) {
     return axios.post("/api/discussion", data);
   },
+  addComment: function (data) {
+    return axios.post(`/api/discussion/:id`, data)
+  },
   isAuthorized: function () {
     return axios.get("/api/authorized");
   },
   logout: function () {
     return axios.get("/api/logout");
   },
-  // addComment: function (data) {
-  //   return axios.get("/api/discussion/:id", data)
-  // },
   availableUN: function (username) {
     return axios.get("/api/user/?username=" + username);
   },
@@ -28,11 +28,11 @@ export default {
   getDiscussions: function (user) {
     return axios.get("/api/discussions", user);
   },
-  onClickComment: function(id) {
-    return axios.get(`/api/discussion/${id}`)
+  onClickComment: function(id, data) {
+    return axios.get(`/api/discussion/${id}`, data)
   },
-  deleteDiscussion: function (id) {
-    return axios.delete(`/api/discussion/:id`, id);
+  deleteDiscussion: function (data) {
+    return axios.delete(`/api/discussion/:id`, data);
   },
   findUserName: function () {
     return axios.get("/api/authorized/")
