@@ -100,12 +100,27 @@ export default class Profile extends Component {
       .catch(err => console.log(err))
   }
 
+  removeSavedArticles = (id) => {
+      API.deleteArticle(id)
+        .then(res => {
+          console.log(res)
+          })
+        .catch(err => {
+          console.log(err)
+        });
+        this.setState({ articles: [] });
+        this.getSavedArticles();
+  };
+  
+      
+
   renderArticle = () => {
     const articleItems = this.state.articles.map(articles => {
       return (
         <SavedArticle
           key={articles._id}
           article={articles}
+          removeSavedArticles={this.removeSavedArticles}
         />
       )
     });

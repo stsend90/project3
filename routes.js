@@ -140,7 +140,7 @@ router.delete("/api/discussion/:id", isAuthenticated, function(req, res) {
 
 router.post("/api/Articles/", isAuthenticated, function (req, res) {
   console.log(req.body);
-  db.Articles.findOneAndUpdate({ title: req.body.title, url: req.body.url })
+  db.Articles.create({ title: req.body.title, url: req.body.url })
   .then(function(dbArticle) {
     return db.User.findOneAndUpdate( {_id: req.user._id}, {$push: {article: dbArticle._id}}, { new: true } )
   })
@@ -165,30 +165,20 @@ router.get("/api/Articles", isAuthenticated, function(req, res) {
   });
 });
 
-router.get("/api/Articles/:id", isAuthenticated, function(req, res) {
-  db.User.findOne({ _id: req.user._id })
-  .populate("article")
-  .then(function(dbArticle) {
-    res.json(dbArticle);
-    console.log(dbArticle);   
-  })
-  .catch(function(err) {
-    res.json(err);
-  });
-});
 
 router.delete("/api/Articles/:id", isAuthenticated, function(req, res) {
-  db.Articles.deleteOne({ _id: req.params._id }),
-  console.log(req.params._id),
-  db.User.deleteOne({ _id: req.params._id })
-  .then(function(dbUser) {
-    console.log(dbUser);
-  })
-  .catch(function(error) {
-    console.log(error);
-  })
-  console.log("Article has been deleted");
-})
+  db.Articles.remove({ _id: req.params.id},
+    function(error, removed) {
+      if (error) {
+        console.log(error);
+        res.send(error);
+      } else {
+        console.log(removed);
+        res.send(removed);
+      }
+    }
+  );
+});
 
 router.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"))
