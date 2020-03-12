@@ -27,6 +27,7 @@ export const NavigationBar = ({ logout }) => (
                         <Navbar.Brand href="/">Home</Navbar.Brand>
                         <Navbar.Brand href="/discussions">Discussion</Navbar.Brand>
                         <Navbar.Brand href="/profile">Profile</Navbar.Brand>
+                        <Navbar.Brand href="/news">Brew News</Navbar.Brand>
                         <FormBtn
                             text="Logout"
                             onClick={logout}

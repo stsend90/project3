@@ -1,5 +1,5 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
+import React, { Component } from 'react';
+import { Card } from 'react-bootstrap';
 import SearchCard from './searchCard';
 import BrewCard from './brewCard';
 import MapCard from './mapCard';
