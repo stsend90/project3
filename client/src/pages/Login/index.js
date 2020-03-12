@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FormGroup, Input, Label, Small, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
+import "./style.css"
+import { Jumbotron } from "react-bootstrap";
 
 class Login extends Component {
   state = {
@@ -44,9 +46,12 @@ class Login extends Component {
   render() {
     return (
       <div className="container loginContainer">
+        <Jumbotron>
+          <p style={{ color: "white", fontSize: "3rem", textAlign: "center"}}>"Hi, Please login before using our site. Thank you!!!"</p>
+        </Jumbotron>
         <form>
           <FormGroup>
-            <Label text="Username" />
+            <Label text="Username:" />
             <Input
               name="username"
               value={this.state.username}
@@ -55,7 +60,7 @@ class Login extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label text="Password" />
+            <Label text="Password:" />
             <Input
               name="password"
               value={this.state.password}

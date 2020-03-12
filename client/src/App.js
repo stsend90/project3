@@ -12,6 +12,7 @@ import Discussion from "./pages/Discussion";
 import CommentSection from "./pages/CommentSection";
 import Profile from "./pages/Profile"
 import API from "./utils/API";
+import BrewNews from "./pages/BrewNews";
 
 class App extends Component {
   state = {
@@ -110,6 +111,13 @@ class App extends Component {
             <Route exact path="/profile">
               {this.state.authorized ? (
                 <Profile logout={this.logout} onClickComment={this.onClickComment} />
+              ) : (
+                <Login isAuthorized={this.isAuthorized} />
+              )}
+            </Route>
+            <Route exact path="/news">
+              {this.state.authorized ? (
+                <BrewNews logout={this.logout} />
               ) : (
                 <Login isAuthorized={this.isAuthorized} />
               )}

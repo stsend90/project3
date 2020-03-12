@@ -1,11 +1,12 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import "./style.css"
 
 
 
 export const BrewCard = ({breweries}) => {
     return (
-        <>  
+        <div className="brewCard">  
 
             <Card.Body>
 
@@ -20,7 +21,7 @@ export const BrewCard = ({breweries}) => {
                 </Card.Text>
             </Card.Body>
 
-        </>
+        </div>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "../../components/Grid";
 import NavigationBar from "../../components/navbar";
-import { ListGroup, Card, CardDeck } from "react-bootstrap";
+import { ListGroup, Card, CardDeck, } from "react-bootstrap";
 import Posts from '../../components/PostCard/Posts';
 import API from "../../utils/API";
 import NewsCard from '../../components/NewsSection/newsCard'
@@ -142,11 +142,16 @@ export default class Profile extends Component {
           <ListGroup.Item>
             <br />
             <h1>{this.state.username}</h1>
+            <Card.Header style={{ color: "white" }} id="newsHeader" as="h2">Your discussions</Card.Header>
+
             <br />
             {this.postCards}
             <br />
             {this.renderArticle()}
           </ListGroup.Item>
+
+
+
           <Row>
 
 

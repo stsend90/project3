@@ -21,6 +21,7 @@ export default class PostCard extends Component {
     render() {
         return (
             <>
+                
                 <ListGroup.Item>
                     <h5>
                         {this.props.date}
